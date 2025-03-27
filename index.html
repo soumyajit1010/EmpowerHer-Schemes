@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rural Women Empowerment Hub</title>
+    <script src="https://unpkg.com/react@17/umd/react.development.js"></script>
+    <script src="https://unpkg.com/react-dom@17/umd/react-dom.development.js"></script>
+    <script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body>
+    <div id="root"></div>
+
+    <script type="text/babel">
+        function RuralWomenSchemes() {
+            const [searchTerm, setSearchTerm] = React.useState('');
+            const [isDarkMode, setIsDarkMode] = React.useState(false);
+
+            const schemes = [
+                {
+                    title: "PM Ujjwala Yojana",
+                    description: "Free LPG connections for women from BPL households.",
+                    benefits: "Reduces health risks from smoke exposure.",
+                    apply: "Visit nearest CSC center or apply online.",
+                    applyLink: "https://pmuy.gov.in",
+                    icon: "🔥"
+                },
+                {
+                    title: "Mudra Loan Scheme",
+                    description: "Loans up to ₹10 lakh for small businesses.",
+                    benefits: "No collateral, flexible repayment.",
+                    apply: "Apply through banks or online portal.",
+                    applyLink: "https://mudra.org.in",
+                    icon: "💰"
+                },
+                {
+                    title: "Ayushman Bharat Yojana",
+                    description: "Free health insurance up to ₹5 lakh per family.",
+                    benefits: "Covers hospital expenses for major diseases.",
+                    apply: "Check eligibility at pmjay.gov.in.",
+                    applyLink: "https://pmjay.gov.in",
+                    icon: "🏥"
+                },
+                {
+                    title: "Mahila E-Haat",
+                    description: "Online platform for women entrepreneurs to sell products.",
+                    benefits: "Direct market access, no intermediaries.",
+                    apply: "Register at mahilaehaat-rmk.gov.in.",
+                    applyLink: "https://mahilaehaat-rmk.gov.in",
+                    icon: "🛒"
+                },
+                {
+                    title: "Stand-Up India",
+                    description: "Loans from ₹10 lakh to ₹1 crore for women-led startups.",
+                    benefits: "Promotes entrepreneurship, subsidized rates.",
+                    apply: "Apply via standupmitra.in.",
+                    applyLink: "https://standupmitra.in",
+                    icon: "🚀"
+                }
+            ];
+
+            const filteredSchemes = schemes.filter(scheme =>
+                scheme.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
+                scheme.description.toLowerCase().includes(searchTerm.toLowerCase())
+            );
+
+            const toggleDarkMode = () => {
+                setIsDarkMode(!isDarkMode);
+                document.body.classList.toggle('dark-mode');
+            };
+
+            return (
+                <div className="container">
+                    
+                    <div className="header">
+                        <h1 className="title">Rural Women Empowerment Hub</h1>
+                        <p className="tagline">Empowering Dreams, Transforming Lives</p>
+                        <div className="controls">
+                            <input
+                                type="text"
+                                placeholder="Search schemes..."
+                                value={searchTerm}
+                                onChange={(e) => setSearchTerm(e.target.value)}
+                                className="search-bar"
+                            />
+                            <button onClick={toggleDarkMode} className="theme-toggle">
+                                {isDarkMode ? "☀️ Light Mode" : "🌙 Dark Mode"}
+                            </button>
+                        </div>
+                    </div>
+                    <div className="scheme-grid">
+                        {filteredSchemes.length > 0 ? (
+                            filteredSchemes.map((scheme, index) => (
+                                <div key={index} className="card">
+                                    <span className="icon">{scheme.icon}</span>
+                                    <h2>{scheme.title}</h2>
+                                    <p>{scheme.description}</p>
+                                    <p><strong>Benefits:</strong> {scheme.benefits}</p>
+                                    <p><strong>Apply:</strong> {scheme.apply}</p>
+                                    <a href={scheme.applyLink} className="btn" target="_blank">Explore Now</a>
+                                </div>
+                            ))
+                        ) : (
+                            <p className="no-results">No schemes found. Try a different search term!</p>
+                        )}
+                    </div>
+                    <div className="cta-banner">
+                        <h3>Get Involved!</h3>
+                        <p>Spread the word or contribute to empower rural women today.</p>
+                        <a href="#contact" className="cta-btn">Join Us</a>
+                    </div>
+                    <footer>
+                        <h3>EmpowerFix: Rural Women Schemes</h3>
+                        <p><strong>Our Target:</strong> Millions of rural women in India who lack access to basic resources like clean cooking fuel, financial support, and healthcare.</p>
+                        <p><strong>The Problem:</strong> Exposure to harmful smoke, limited financial independence, inadequate healthcare, and low awareness of government schemes hinder their empowerment.</p>
+                        <p><strong>Our Solution:</strong> A React-based platform showcasing key schemes with concise details and direct links to official resources.</p>
+                        <p><strong>Mission:</strong> Empower rural women by simplifying access to information, enabling financial and health security.</p>
+                        <div className="social-links">
+                            <a href="" className="social-btn" title="Instagram"><i className="fab fa-instagram"></i></a>
+                            <a href="mailto:example@gmail.com" className="social-btn" title="Email"><i className="fas fa-envelope"></i></a>
+                            <a href="" className="social-btn" title="LinkedIn"><i className="fab fa-linkedin"></i></a>
+                        </div>
+                        <p className="credits">© 2025 Empowerment Hub | Designed with Passion</p>
+                    </footer>
+                </div>
+            );
+        }
+
+        ReactDOM.render(<RuralWomenSchemes />, document.getElementById("root"));
+    </script>
+</body>
+</html>
